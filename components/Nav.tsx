@@ -47,7 +47,7 @@ export default function Example() {
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
-              Docs
+              Documents
             </a>
           </nav>
         </div>
@@ -66,21 +66,30 @@ export default function Example() {
             <input className="mx-4 w-full border rounded-md px-4 py-2" type="text" placeholder="Search" />
           </div>
 
-
-          <div className="flex items-center pr-4">
-
-          </div>
           {/* -------------------- */}
-          <span className="sm:ml-3">
-            <Link href='/hydropowers'>
+          <div className="flex items-center pr-4">
+            <span className="ml-3 hidden sm:block">
               <button
                 type="button"
-                className="inline-flex mr-5 items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Map
+                About
               </button>
-            </Link>
-          </span>
+            </span>
+            <span className="sm:ml-3">
+              <Link href='/hydropowers'>
+                <button
+                  type="button"
+                  className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Map
+                </button>
+              </Link>
+            </span>
+          </div>
+          {/* -------------------- */}
+
+
         </div>
         <div className="p-4">
           <h1 className="text-2xl font-bold">Welcome to my dashboard!</h1>
@@ -117,14 +126,14 @@ export default function Example() {
 //           </Link>
 //         </span>
 
-//         <span className="ml-3 hidden sm:block">
-//           <button
-//             type="button"
-//             className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-//           >
-//             Data
-//           </button>
-//         </span>
+// <span className="ml-3 hidden sm:block">
+//   <button
+//     type="button"
+//     className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+//   >
+//     Data
+//   </button>
+// </span>
 
 //         <span className="sm:ml-3">
 //           <Link href='/hydropowers'>
