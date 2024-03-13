@@ -9,11 +9,7 @@ export const metadata: Metadata = {
   description: "The hydro map",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({children}: Readonly<{ children: React.ReactNode;}>) {
   return (
     <html lang="en">
       <body className={inter.className}>{children}</body>

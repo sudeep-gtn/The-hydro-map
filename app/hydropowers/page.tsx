@@ -1,9 +1,14 @@
-import React from "react";
-import Map from "../../components/Map";
-import RootLayout from '../layout'
-import Nav from '../../components/Nav'
-export default function Hydropowers(){
-    return(
-        <Map />
-    )
+import dynamic from 'next/dynamic'
+// import OpenStreetMap from '../component/OpenStreetMap'
+const Map2 = dynamic(() => import('../../components/Map'), {
+  ssr: false,
+})
+const index = () => {
+  return (
+    <>
+      <h1 className='text-center'>OpenStreetMap</h1>
+      <Map2 />
+    </>
+  )
 }
+export default index
