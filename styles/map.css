@@ -1,0 +1,10 @@
+.map-container{
+    position: fixed;
+    top: 10%;
+    left: 10%;
+    margin: 10px 20px;
+    width: 80%;
+    border: 1px solid black; 
+    height: 80%;
+    /* z-index: 1000; */
+}
