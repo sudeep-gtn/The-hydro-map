@@ -13,7 +13,7 @@ import '../styles/map.css';
 // sub components
 import MyLocation from "./maps/DetectYourLocation";
 import {MarkerContents} from "./maps/Marker";
-
+import {ProvinceMarker} from './maps/Marker';
 //GeoJSON files 
 import districtTiles from '../data/map-tiles/nepal-districts-new.json';
 import provinceTiles from '../data/map-tiles/states.json';
@@ -22,7 +22,6 @@ import provinceProps from '../data/map-tiles/province-props.json';
 
 
 const myStyles = { color: 'black', fillColor: 'none', weight: 1 };
-
 
 // Icon style
 
@@ -34,6 +33,7 @@ function DistrictGeo({ visible, data }: any) {
 function ProvinceGeoJSON({ visible, data }: any) {
   return visible ? <GeoJSON data={data} style={myStyles} /> : null;
 }
+
 
 
 function MyMapComponent() {
@@ -72,10 +72,9 @@ function MyMapComponent() {
 
         {/* Render either district or province GeoJSON based on zoom level */}
         {zoomLevel > 8.5 ? <DistrictGeo visible={true} data={districtTiles} /> : <ProvinceGeoJSON visible={true} data={provinceTiles} />}
-        {/* <GeoJSON data={provinceProps} pointToLayer={setIcon} /> */}
+        {zoomLevel > 8 ? <MarkerContents /> : null }
+        {zoomLevel <= 8 ? <ProvinceMarker /> : null }
         <MyLocation />
-
-        <MarkerContents />
       </>
     );
   }

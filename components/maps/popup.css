@@ -1,0 +1,35 @@
+.pop-up {
+    width: 250px;
+    height: auto;
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.307) ;
+    border-radius: 12px;
+}
+.pop-up h1{
+    font-size: 17px;
+    font-weight: 600;
+    border-bottom: 1px solid black;
+    color: rgb(79, 108, 182);
+}
+
+.pop-up-gtn{
+    width: 300px;
+    height: auto;
+    border-radius: 5px;
+    border: 1px solid rgb(9, 147, 62) ;
+    border-radius: 12px;
+}
+.pop-up-gtn h1{
+    font-size: 17px;
+    font-weight: 600;
+    border-bottom: 1px solid black;
+    color: rgb(4, 141, 64);
+}
+.province-label{
+    height: 100px;
+    width: 100px;
+    background-color: #fff;
+    border-radius: 50%;
+    align-items: center;
+}
