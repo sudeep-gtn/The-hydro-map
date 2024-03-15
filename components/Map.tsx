@@ -1,20 +1,33 @@
 "use client";
 import React, { useState, useRef, RefObject, useEffect } from "react";
 
-import { Map, LeafletMouseEvent, LatLngTuple, map } from "leaflet";
+import L, { LatLngTuple, divIcon } from "leaflet";
 import { MapContainer, TileLayer, Marker, Popup, Rectangle, Polyline, GeoJSON, useMap } from "react-leaflet";
 import VectorTileLayer from "react-leaflet-vector-tile-layer";
 
+
+// CSS-files
 import "tailwindcss/tailwind.css";
 import '../styles/map.css';
 
-import LocationMarker from "./maps/LocationMarker";
+// sub components
+import MyLocation from "./maps/DetectYourLocation";
+import {MarkerContents} from "./maps/Marker";
 
 //GeoJSON files 
 import districtTiles from '../data/map-tiles/nepal-districts-new.json';
 import provinceTiles from '../data/map-tiles/states.json';
+import provinceProps from '../data/map-tiles/province-props.json';
+
+
 
 const myStyles = { color: 'black', fillColor: 'none', weight: 1 };
+
+
+// Icon style
+
+
+// conditional rendering for Province and District Tiles
 function DistrictGeo({ visible, data }: any) {
   return visible ? <GeoJSON data={data} style={myStyles} /> : null;
 }
@@ -30,7 +43,9 @@ function MyMapComponent() {
   ];
 
   const [zoomLevel, setZoomLevel] = useState(7.5);
-  // --------------------------------------------------------------------------------------------
+
+
+  // Map contents tilelayer, marker, retangle and so on ..............
   function MapContent() {
     const map = useMap();
 
@@ -46,6 +61,7 @@ function MyMapComponent() {
       };
     }, [map]);
 
+
     return (
       <>
         <TileLayer
@@ -56,14 +72,10 @@ function MyMapComponent() {
 
         {/* Render either district or province GeoJSON based on zoom level */}
         {zoomLevel > 8.5 ? <DistrictGeo visible={true} data={districtTiles} /> : <ProvinceGeoJSON visible={true} data={provinceTiles} />}
+        {/* <GeoJSON data={provinceProps} pointToLayer={setIcon} /> */}
+        <MyLocation />
 
-        <LocationMarker />
-
-        <Marker position={[27.708572067184317, 85.33439213989928]}>
-          <Popup>
-            <h1> Greentick Nepal</h1> Contact us for IS edit.
-          </Popup>
-        </Marker>
+        <MarkerContents />
       </>
     );
   }
@@ -76,7 +88,6 @@ function MyMapComponent() {
         scrollWheelZoom={true}
         style={{ height: "100%" }} // Set height and width inline
       >
-
 
         <MapContent />
         <Rectangle opacity={0.8} bounds={rectangle} pathOptions={{fillColor: 'black', fillOpacity: 0.05,color:'black' , weight : 1 }} />

@@ -10,3 +10,9 @@
     z-index:0;
     border: none;
 }
+
+.icon {
+    border: none;
+    background: transparent;
+    color: #8e8d8d;
+}

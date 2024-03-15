@@ -5,7 +5,7 @@ interface Position {
     lat: number;
     lng: number;
 };
-function LocationMarker() {
+function MyLocation() {
 
     const [position, setPosition] = useState<Position | null>(null);
     const map = useMapEvents({
@@ -26,4 +26,4 @@ function LocationMarker() {
     )
   }
 
-export default LocationMarker;
+export default MyLocation;
