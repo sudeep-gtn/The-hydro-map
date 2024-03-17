@@ -3,11 +3,13 @@
     height: auto;
     border-radius: 5px;
     text-align: center;
-    border: 1px solid rgba(0, 0, 0, 0.307) ;
     border-radius: 12px;
+    align-items: center;
 }
 .pop-up h1{
     font-size: 17px;
+    margin-bottom: 10px;
+    text-align: center;
     font-weight: 600;
     border-bottom: 1px solid black;
     color: rgb(79, 108, 182);
