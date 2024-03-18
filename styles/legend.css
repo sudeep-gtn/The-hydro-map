@@ -1,0 +1,24 @@
+/* components/Legend.css */
+.legend {
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .legend-item {
+    margin-bottom: 5px;
+  }
+  
+  .legend-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .legend-label {
+    vertical-align: middle;
+  }
+  

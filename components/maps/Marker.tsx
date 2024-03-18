@@ -7,7 +7,7 @@ import 'tailwindcss/tailwind.css';
 import hydroData from '../../data/hydro/hydropwers.json'
 
 // hydroData context
-import { useHydropower,HydropowerContext } from "../HydroContext";
+
 
 // function useHydropower() {
 //   return useContext(HydropowerContext);
@@ -16,9 +16,6 @@ import { useHydropower,HydropowerContext } from "../HydroContext";
 
 // CSS files
 import './popup.css';
-
-
-
 
 interface HydropowerData {
   Project: string;
@@ -59,10 +56,6 @@ const getIcon = (licenseType: string) => {
 
 
 function MarkerContents() {
-  const { selectedHydropower, updateSelectedHydropower } = useHydropower();
-  const handleMarkerClick = (item :any) => {
-    updateSelectedHydropower(item); // Update the selected hydropower data
-  };
   return (
     <>
       {hydroData.map((item , index) => (
@@ -70,9 +63,6 @@ function MarkerContents() {
           icon={getIcon(item["License Type"])}
           key={index}
           position={[item.Latitude, item.Longitude]}
-          eventHandlers={{
-            click: () => handleMarkerClick(item)
-          }}
         >
           <Popup className="pop-up">
             <h1>{item.Project}</h1>

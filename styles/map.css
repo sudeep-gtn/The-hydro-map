@@ -3,10 +3,10 @@
     /* position: fixed; */
     top: 10%;
     left: 0 ;
-    /* margin-left: 10px; */
     height: 100%;
     z-index:-999999999;
     /* border: none; */
+    
 }
 
 .icon {

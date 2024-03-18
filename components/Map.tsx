@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useRef, RefObject, useEffect } from "react";
-
 import L, { LatLngTuple, divIcon } from "leaflet";
 import { MapContainer, TileLayer, Marker, Popup, Rectangle, Polyline, GeoJSON, useMap } from "react-leaflet";
 import VectorTileLayer from "react-leaflet-vector-tile-layer";
@@ -9,27 +8,20 @@ import VectorTileLayer from "react-leaflet-vector-tile-layer";
 // CSS-files
 import "tailwindcss/tailwind.css";
 import '../styles/map.css';
+import '../styles/legend.css';
 
 // sub components
 import MyLocation from "./maps/DetectYourLocation";
-import  MarkerContents from "./maps/Marker";
+import MarkerContents from "./maps/Marker";
 //GeoJSON files 
 import districtTiles from '../data/map-tiles/nepal-districts-new.json';
 import provinceTiles from '../data/map-tiles/states.json';
 import provinceProps from '../data/map-tiles/province-props.json';
 
 
-
 const myStyles = { color: 'black', fillColor: 'none', weight: 1 };
 
 // Icon style
-const officeIcon = L.icon({
-  iconUrl: 'https://api.geoapify.com/v1/icon/?type=awesome&color=%2364b438&size=small&icon=landmark&iconSize=small&scaleFactor=2&apiKey=2d6a0e73bd9f4639b8172b46216c43f7',
-  iconSize: [25, 41],
-  iconAnchor: [12.5, 41],
-  popupAnchor: [0, -41]
-});
-
 // conditional rendering for Province and District Tiles
 function DistrictGeo({ visible, data }: any) {
   return visible ? <GeoJSON data={data} style={myStyles} /> : null;
@@ -43,7 +35,7 @@ function ProvinceGeoJSON({ visible, data }: any) {
 function MyMapComponent() {
   const rectangle: LatLngTuple[] = [
     [30.5056, 80.058],
-    [26.3475, 88.3015] 
+    [26.3475, 88.3015]
   ];
 
   const [zoomLevel, setZoomLevel] = useState(7.5);
@@ -53,7 +45,35 @@ function MyMapComponent() {
   function MapContent() {
     const map = useMap();
 
+
     useEffect(() => {
+      const legend = L.control({ position: 'topright' });
+
+
+      // Define legend content
+      legend.onAdd = function (map: any) {
+        const div = L.DomUtil.create('div', 'legend');
+        div.innerHTML = `
+        <h4 class="text-base font-semibold mb-2 text-center">Legends</h4>
+        <div class="legend-item flex items-center mb-1">
+          <img src="https://api.geoapify.com/v1/icon/?type=awesome&color=%23ffcf24&size=small&icon=lightbulb&iconSize=small&noWhiteCircle&apiKey=2d6a0e73bd9f4639b8172b46216c43f7" alt="Lightbulb Icon" class="mr-2" />
+          <span class="legend-label">Survey</span>
+        </div>
+        <div class="legend-item flex items-center mb-1">
+          <img src="https://api.geoapify.com/v1/icon/?type=awesome&color=%231774f1&size=small&icon=hammer&iconSize=small&textSize=small&noWhiteCircle&apiKey=2d6a0e73bd9f4639b8172b46216c43f7" alt="Lightbulb Icon" class="mr-2" />
+          <span class="legend-label">Under Construction</span>
+        </div>
+        <div class="legend-item flex items-center mb-1">
+          <img src="https://api.geoapify.com/v1/icon/?type=awesome&color=%2326a615&size=small&icon=tree&iconSize=small&textSize=small&noWhiteCircle&apiKey=2d6a0e73bd9f4639b8172b46216c43f7" alt="Lightbulb Icon" class="mr-2" />
+          <span class="legend-label">Operation</span>
+        </div>
+      `;
+        return div;
+      };
+
+      // Add legend to map
+      legend.addTo(map);
+
       const updateZoomLevel = () => {
         setZoomLevel(Math.round(map.getZoom()));
       };
@@ -62,6 +82,7 @@ function MyMapComponent() {
 
       return () => {
         map.off('zoomend', updateZoomLevel);
+        legend.remove();
       };
     }, [map]);
 
@@ -76,13 +97,8 @@ function MyMapComponent() {
 
         {/* Render either district or province GeoJSON based on zoom level */}
         {zoomLevel > 8.5 ? <DistrictGeo visible={true} data={districtTiles} /> : <ProvinceGeoJSON visible={true} data={provinceTiles} />}
-        {zoomLevel > 7.6 ? <MarkerContents /> : null }
+        {zoomLevel > 7.6 ? <MarkerContents /> : null}
         <MyLocation />
-        <Marker position={[27.708572067184317, 85.33439213989928]} icon={officeIcon} >
-            <Popup className="pop-up-gtn">
-                <h1>Green Tick Nepal</h1> Visit :  <a href="https://www.gtn.com.np" about="blank">gtn.com.np</a>
-            </Popup>
-        </Marker>
       </>
     );
   }
@@ -96,7 +112,8 @@ function MyMapComponent() {
         style={{ height: "100%" }}>
 
         <MapContent />
-        <Rectangle opacity={0.8} bounds={rectangle} pathOptions={{fillColor: 'black', fillOpacity: 0.05,color:'black' , weight : 1 }} />
+        <Rectangle opacity={0.8} bounds={rectangle} pathOptions={{ fillColor: 'black', fillOpacity: 0.05, color: 'black', weight: 1 }} />
+        {/* <Legend /> */}
       </MapContainer>
     </div>
   );

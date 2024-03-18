@@ -5,8 +5,8 @@ import React, { useState } from 'react';
 
 import dynamic from 'next/dynamic'
 import Head from "next/head";
-import Nav from '../components/Nav';
-
+// import Nav from '../components/Nav';
+import Nav from "@/components/Nav";
 import '../styles/chart.css';
 import 'tailwindcss/tailwind.css';
 
@@ -34,7 +34,7 @@ const Home: React.FC<{}> = () => {
         <div className="col-span-1">
           <HydropowerDetailsSidebar />
           <div className="charts container border border-black-800 mt-2 rounded bg-gray-100">
-            <div className="text-center font-semibold text-lg p-4 border-b border-gray-200 bg-gray-200"> Hydropower Status </div>
+            <div className="text-center font-semibold text-lg p-4 border-b border-gray-400 bg-blue-200"> Hydropower Distribution </div>
             <PieChart />
           </div>
         </div>

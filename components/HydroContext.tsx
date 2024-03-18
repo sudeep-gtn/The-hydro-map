@@ -55,62 +55,51 @@ export function useHydropower(){
 
 const HydropowerDetailsSidebar = () => {
 
-    // console.log("Hydropower selected : ", selectedHydropower);
-    return (
-      <div className="border border-gray-300 shadow-sm rounded-lg overflow-hidden mx-auto ">
-        <div className="text-center bg-gray-200 font-semibold text-lg p-4 border-b border-gray-400 ">Kulekhani Hydropower</div>
-        <table className="w-full text-sm leading-5">
-          <thead className="bg-gray-100 mt-2">
-            <tr>
-              <th className="py-3 px-4  text-left font-medium text-gray-600">Project</th>
-              <th className="py-3 px-4 text-left font-medium text-gray-600">Kulekhani Project b</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td className="py-3 px-4 text-left font-medium text-gray-600">Calories</td>
-              <td className="py-3 px-4 text-left">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, iusto!</td>
-            </tr>
-            <tr className="bg-gray-50">
-              <td className="py-3 px-4 text-left font-medium text-gray-600 w-7">Address</td>
-              <td className="py-3 px-4 text-left">Lorem ipsum dolor sit amet consectetur.</td>
-            </tr>
-            <tr>
-              <td className="py-3 px-4 text-left font-medium text-gray-600">Liscese No</td>
-              <td className="py-3 px-4 text-left">240</td>
-            </tr>
-            <tr className="bg-gray-50">
-              <td className="py-3 px-4 text-left font-medium text-gray-600">Total Fat</td>
-              <td className="py-3 px-4 text-left">12g</td>
-            </tr>
-            <tr>
-              <td className="py-3 px-4 text-left font-medium text-gray-600">Calories</td>
-              <td className="py-3 px-4 text-left">240</td>
-            </tr>
-            <tr className="bg-gray-50">
-              <td className="py-3 px-4 text-left font-medium text-gray-600">Total Fat</td>
-              <td className="py-3 px-4 text-left">12g</td>
-            </tr>
-            <tr>
-              <td className="py-3 px-4 text-left font-medium text-gray-600">Calories</td>
-              <td className="py-3 px-4 text-left">240</td>
-            </tr>
-            <tr className="bg-gray-50">
-              <td className="py-3 px-4 text-left font-medium text-gray-600">Total Fat</td>
-              <td className="py-3 px-4 text-left">12g</td>
-            </tr>
-            <tr>
-              <td className="py-3 px-4 text-left font-medium text-gray-600">Calories</td>
-              <td className="py-3 px-4 text-left">240</td>
-            </tr>
-            <tr className="bg-gray-50">
-              <td className="py-3 px-4 text-left font-medium text-gray-600">Total Fat</td>
-              <td className="py-3 px-4 text-left">12g</td>
-            </tr>
-          </tbody>
-        </table>
-    </div>
-    );
+  // console.log("Hydropower selected : ", selectedHydropower);
+  return (
+    <div className="border border-gray-300 shadow-sm rounded-lg overflow-hidden mx-auto ">
+      <div className="text-center bg-blue-200 font-semibold text-lg p-4 border-b border-gray-400 ">Aayu Chhatigad Hydropower Project</div>
+      <table className="w-full text-sm leading-5">
+        <tbody>
+          <tr>
+            <td className="py-3 px-4 text-left font-bold text-gray-600 w-1/3">Isuue Date</td>
+            <td className="py-3 px-4 text-left">12/21/2073</td>
+          </tr>
+          <tr className="bg-gray-50">
+            <td className="py-3 px-4 text-left font-bold text-gray-600 w-1/3">Validity</td>
+            <td className="py-3 px-4 text-left">12/20/2075</td>
+          </tr>
+          <tr>
+            <td className="py-3 px-4 text-left font-bold text-gray-600 w-1/3">Liscese No</td>
+            <td className="py-3 px-4 text-left">798</td>
+          </tr>
+          <tr className="bg-gray-50">
+            <td className="py-3 px-4 text-left font-bold text-gray-600 w-1/3">Address</td>
+            <td className="py-3 px-4 text-left">Anamnagar-32,Kathmandu,Nepal. GPO 20863, 4102710, Kadam KC 9851159634</td>
+          </tr>
+          <tr>
+            <td className="py-3 px-4 text-left font-bold text-gray-600 w-1/3">License Type</td>
+            <td className="py-3 px-4 text-left">Survey</td>
+          </tr>
+          <tr className="bg-gray-50">
+            <td className="py-3 px-4 text-left font-bold text-gray-600 w-1/3">Promoter</td>
+            <td className="py-3 px-4 text-left">Puwa Khola-1 Hydro Power Pvt.Ltd.</td>
+          </tr>
+          <tr>
+            <td className="py-3 px-4 text-left font-bold text-gray-600 w-1/3">River</td>
+            <td className="py-3 px-4 text-left">Chatti Gad</td>
+          </tr>
+          <tr className="bg-gray-50">
+            <td className="py-3 px-4 text-left font-bold text-gray-600 w-1/3">Capacity (MW)</td>
+            <td className="py-3 px-4 text-left">13.942</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+  );
 };
 
 export default HydropowerDetailsSidebar;
+
+
+
