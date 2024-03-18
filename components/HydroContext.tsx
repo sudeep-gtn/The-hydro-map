@@ -1,189 +1,115 @@
-import React , {useState ,createContext, useContext} from "react";
-import 'tailwindcss/tailwind.css';
-import hydroJSON from '../data/hydro/hydropwers.json';
+'use client';
 
+// HydropowerContext.tsx
+import React, { createContext, useContext, useState } from "react";
 
 interface HydropowerData {
-    Project: string;
-    Province: string;
-    District: string;
-    Municipality: string;
-    Capacity: number;
-    River: string;
-    LicenseNo: number;
-    IssueDate: string;
-    Validity: string;
-    Promoter: string;
+  Project: string;
+  Province: string;
+  District: string;
+  Municipality: string;
+  Capacity: number;
+  River: string;
+  LicenseNo: number;
+  IssueDate: string;
+  Validity: string;
+  Promoter: string;
 };
 
-// interface SidebarProps {
-//     selectedHydropower: HydropowerDetails | null;
-// };
 interface HydropowerContextType {
-    hydropowerData: HydropowerData[];
-    setHydropowerData: React.Dispatch<React.SetStateAction<HydropowerData[]>>;
+  hydropowerData: HydropowerData[];
+  setHydropowerData: any;
+  selectedHydropower: any;
+  updateSelectedHydropower: any;
+}
+
+export const HydropowerContext = createContext<HydropowerContextType | null>(null);
+
+export const HydropowerProvider: React.FC = ({ children }:any) => {
+  const [hydropowerData, setHydropowerData] = useState<HydropowerData[]>([]);
+  const [selectedHydropower, setSelectedHydropower] = useState<HydropowerData | null>(null);
+
+  const updateSelectedHydropower = (data: HydropowerData | null) => {
+    setSelectedHydropower(data);
+  };
+  return (
+    <HydropowerContext.Provider value={{ hydropowerData, setHydropowerData, selectedHydropower, updateSelectedHydropower }}>
+      {children}
+    </HydropowerContext.Provider>
+  );
 };
 
-const HydropowerContext = createContext<HydropowerContextType | undefined>(undefined);
+export function useHydropower(){
+  const context = useContext(HydropowerContext);
+  if(!context) return ("NO Context Provided ......");
+  return context;
+}
+// export function useHydropower() {
+//   const context = useContext(HydropowerContext);
+//   if (!context) {
+//     throw new Error('useHydropower must be used within a HydropowerProvider');
+//   }
+//   return context;
+// };
 
-export const HydropowerProvider = ({ children }:any) => {
-    const [hydropowerData, setHydropowerData] = useState<HydropowerData[]>([]);
-  
+
+const HydropowerDetailsSidebar = () => {
+
+    // console.log("Hydropower selected : ", selectedHydropower);
     return (
-      <HydropowerContext.Provider value={{ hydropowerData, setHydropowerData }}>
-        {children}
-      </HydropowerContext.Provider>
+      <div class="border border-gray-300 shadow-sm rounded-lg overflow-hidden max-w-sm mx-auto mt-16">
+      <table class="w-full text-sm leading-5">
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="py-3 px-4 text-left font-medium text-gray-600">Nutrient</th>
+            <th class="py-3 px-4 text-left font-medium text-gray-600">Amount per Serving (100g)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="py-3 px-4 text-left font-medium text-gray-600">Calories</td>
+            <td class="py-3 px-4 text-left">240</td>
+          </tr>
+          <tr class="bg-gray-50">
+            <td class="py-3 px-4 text-left font-medium text-gray-600">Total Fat</td>
+            <td class="py-3 px-4 text-left">12g</td>
+          </tr>
+          <tr>
+            <td class="py-3 px-4 text-left font-medium text-gray-600 pl-8">Saturated Fat</td>
+            <td class="py-3 px-4 text-left">3.5g</td>
+          </tr>
+          <tr class="bg-gray-50">
+            <td class="py-3 px-4 text-left font-medium text-gray-600 pl-8">Trans Fat</td>
+            <td class="py-3 px-4 text-left">0g</td>
+          </tr>
+          <tr>
+            <td class="py-3 px-4 text-left font-medium text-gray-600">Cholesterol</td>
+            <td class="py-3 px-4 text-left">45mg</td>
+          </tr>
+          <tr class="bg-gray-50">
+            <td class="py-3 px-4 text-left font-medium text-gray-600">Sodium</td>
+            <td class="py-3 px-4 text-left">430mg</td>
+          </tr>
+          <tr>
+            <td class="py-3 px-4 text-left font-medium text-gray-600">Total Carbohydrate</td>
+            <td class="py-3 px-4 text-left">19g</td>
+          </tr>
+          <tr class="bg-gray-50">
+            <td class="py-3 px-4 text-left font-medium text-gray-600 pl-8">Dietary Fiber</td>
+            <td class="py-3 px-4 text-left">3g</td>
+          </tr>
+          <tr>
+            <td class="py-3 px-4 text-left font-medium text-gray-600 pl-8">Sugars</td>
+            <td class="py-3 px-4 text-left">4g</td>
+          </tr>
+          <tr class="bg-gray-50">
+            <td class="py-3 px-4 text-left font-medium text-gray-600">Protein</td>
+            <td class="py-3 px-4 text-left">22g</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     );
 };
 
-export const useHydropower = () => {
-    const context = useContext(HydropowerContext);
-    if (!context) {
-      throw new Error('useHydropower must be used within a HydropowerProvider');
-    }
-    return context;
-};
-
-
-
-
-// const HydropowerDetailsSidebar: React.FC<SidebarProps> = ({ selectedHydropower }) => {
-//     if (!selectedHydropower) {
-//         return null;
-//     }
-//     console.log("Hydropower selected : ", selectedHydropower);
-//     return (
-//         <div className="block w-full overflow-x-auto max-w-xl border">
-//             <table className="items-center w-full bg-transparent border-collapse">
-//                 <thead>
-//                     <tr>
-//                         <th className="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
-//                             Hello
-//                         </th>
-//                         <th className="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap">
-//                             {selectedHydropower.Promoter}
-//                         </th>
-//                         <th
-//                             className="px-4 bg-gray-50 text-gray-700 align-middle py-3 text-xs font-semibold text-left uppercase border-l-0 border-r-0 whitespace-nowrap min-w-140-px">
-//                         </th>
-//                     </tr>
-//                 </thead>
-//                 <tbody className="divide-y divide-gray-100">
-//                     <tr className="text-gray-500">
-//                         <th className="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">Provine 1</th>
-//                         <td className="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">
-//                             5,649</td>
-//                         <td className="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
-//                             <div className="flex items-center">
-//                                 <span className="mr-2 text-xs font-medium">30%</span>
-//                                 <div className="relative w-full">
-//                                     <div className="w-full bg-gray-200 rounded-sm h-2">
-//                                         <div className="bg-cyan-600 h-2 rounded-sm w-30"></div>
-//                                     </div>
-//                                 </div>
-//                             </div>
-//                         </td>
-//                     </tr>
-//                     <tr className="text-gray-500">
-//                         <th className="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">
-//                             Province 2</th>
-//                         <td className="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">
-//                             4,025</td>
-//                         <td className="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
-//                             <div className="flex items-center">
-//                                 <span className="mr-2 text-xs font-medium">24%</span>
-//                                 <div className="relative w-full">
-//                                     <div className="w-full bg-gray-200 rounded-sm h-2">
-//                                         <div className="bg-orange-300 h-2 rounded-sm w-24"></div>
-//                                     </div>
-//                                 </div>
-//                             </div>
-//                         </td>
-//                     </tr>
-//                     <tr className="text-gray-500">
-//                         <th className="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">Bagmati
-//                         </th>
-//                         <td className="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">
-//                             3,105</td>
-//                         <td className="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
-//                             <div className="flex items-center">
-//                                 <span className="mr-2 text-xs font-medium">18%</span>
-//                                 <div className="relative w-full">
-//                                     <div className="w-full bg-gray-200 rounded-sm h-2">
-//                                         <div className="bg-teal-400 h-2 rounded-sm w-18"></div>
-//                                     </div>
-//                                 </div>
-//                             </div>
-//                         </td>
-//                     </tr>
-//                     <tr className="text-gray-500">
-//                         <th className="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">Province 4
-//                         </th>
-//                         <td className="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">
-//                             1251</td>
-//                         <td className="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
-//                             <div className="flex items-center">
-//                                 <span className="mr-2 text-xs font-medium">12%</span>
-//                                 <div className="relative w-full">
-//                                     <div className="w-full bg-gray-200 rounded-sm h-2">
-//                                         <div className="bg-pink-600 h-2 rounded-sm w-12"></div>
-//                                     </div>
-//                                 </div>
-//                             </div>
-//                         </td>
-//                     </tr>
-//                     <tr className="text-gray-500">
-//                         <th className="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">Province 5
-//                         </th>
-//                         <td className="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">734
-//                         </td>
-//                         <td className="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
-//                             <div className="flex items-center">
-//                                 <span className="mr-2 text-xs font-medium">9%</span>
-//                                 <div className="relative w-full">
-//                                     <div className="w-full bg-gray-200 rounded-sm h-2">
-//                                         <div className="bg-indigo-600 h-2 rounded-sm w-9"></div>
-//                                     </div>
-//                                 </div>
-//                             </div>
-//                         </td>
-//                     </tr>
-//                     <tr className="text-gray-500">
-//                         <th className="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">Province 6
-//                         </th>
-//                         <td className="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">734
-//                         </td>
-//                         <td className="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
-//                             <div className="flex items-center">
-//                                 <span className="mr-2 text-xs font-medium">9%</span>
-//                                 <div className="relative w-full">
-//                                     <div className="w-full bg-gray-200 rounded-sm h-2">
-//                                         <div className="bg-indigo-600 h-2 rounded-sm w-9"></div>
-//                                     </div>
-//                                 </div>
-//                             </div>
-//                         </td>
-//                     </tr>
-//                     <tr className="text-gray-500">
-//                         <th className="border-t-0 px-4 align-middle text-sm font-normal whitespace-nowrap p-4 text-left">Province 7
-//                         </th>
-//                         <td className="border-t-0 px-4 align-middle text-xs font-medium text-gray-900 whitespace-nowrap p-4">734
-//                         </td>
-//                         <td className="border-t-0 px-4 align-middle text-xs whitespace-nowrap p-4">
-//                             <div className="flex items-center">
-//                                 <span className="mr-2 text-xs font-medium">9%</span>
-//                                 <div className="relative w-full">
-//                                     <div className="w-full bg-gray-200 rounded-sm h-2">
-//                                         <div className="bg-indigo-600 h-2 rounded-sm w-9"></div>
-//                                     </div>
-//                                 </div>
-//                             </div>
-//                         </td>
-//                     </tr>
-//                 </tbody>
-//             </table>
-//         </div>
-//     );
-// };
-
-// export default HydropowerDetailsSidebar;
+export default HydropowerDetailsSidebar;

@@ -12,7 +12,7 @@ import '../styles/map.css';
 
 // sub components
 import MyLocation from "./maps/DetectYourLocation";
-import {MarkerContents} from "./maps/Marker";
+import  MarkerContents from "./maps/Marker";
 //GeoJSON files 
 import districtTiles from '../data/map-tiles/nepal-districts-new.json';
 import provinceTiles from '../data/map-tiles/states.json';

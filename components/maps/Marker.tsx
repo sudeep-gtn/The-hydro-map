@@ -1,16 +1,39 @@
-import React, { useEffect, useState } from "react";
+'use client';
+import React, { useEffect, useState, createContext, useContext } from "react";
 import L from 'leaflet';
 import { Marker, Popup, Tooltip, CircleMarker } from "react-leaflet";
-
 import 'tailwindcss/tailwind.css';
-import './popup.css';
 
 import hydroData from '../../data/hydro/hydropwers.json'
 
-import {HydropowerProvider} from "../HydroContext";
+// hydroData context
+import { useHydropower,HydropowerContext } from "../HydroContext";
 
-// const [zoomLevel, setZoomLevel] = useState(7.5);
+// function useHydropower() {
+//   return useContext(HydropowerContext);
+// }
 
+
+// CSS files
+import './popup.css';
+
+
+
+
+interface HydropowerData {
+  Project: string;
+  Province: string;
+  District: string;
+  Municipality: string;
+  Capacity: number;
+  River: string;
+  LicenseNo: number;
+  IssueDate: string;
+  Validity: string;
+  Promoter: string;
+};
+
+// Icons for different Hydropower status(survey , generation , operation )
 const getIcon = (licenseType: string) => {
   let iconUrl;
   switch (licenseType) {
@@ -34,15 +57,15 @@ const getIcon = (licenseType: string) => {
   });
 }
 
-export function MarkerContents() {
 
-  const [selectedHydropower, setSelectedHydropower] = useState<any>(null);
-  const handleMarkerClick = (item: any) => {
-    setSelectedHydropower(item);
-  }
+function MarkerContents() {
+  const { selectedHydropower, updateSelectedHydropower } = useHydropower();
+  const handleMarkerClick = (item :any) => {
+    updateSelectedHydropower(item); // Update the selected hydropower data
+  };
   return (
     <>
-      {hydroData.map((item, index) => (
+      {hydroData.map((item , index) => (
         <Marker
           icon={getIcon(item["License Type"])}
           key={index}
@@ -57,7 +80,10 @@ export function MarkerContents() {
           <Tooltip sticky className="tooltipss"> {item.Project} </Tooltip>
         </Marker>
       ))}
-      <HydropowerProvider selectedHydropower={selectedHydropower} />
+
+      {/* <HydropowerProvider selectedHydropower={selectedHydropower} /> */}
     </>
   );
 }
+
+export default MarkerContents;
