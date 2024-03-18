@@ -108,7 +108,7 @@ function classNames(...classes: any) {
 export default function Demo() {
   const greet: string = 'Hello World'
   return (
-    <div className="lg:flex lg:items-center lg:justify-between m-3 p-4 shadow-xl">
+    <div className="lg:flex lg:items-center lg:justify-between m-3 w-full p-4 shadow-xl z-50">
       <Link href='/'>
         <div className="min-w-0 flex-1">
           <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">

@@ -1,13 +1,12 @@
 @import url('https://unpkg.com/leaflet@1.5.1/dist/leaflet.css');
 .map-container{
-    position: fixed;
+    /* position: fixed; */
     top: 10%;
     left: 0 ;
-    margin-left: 10px;
-    width: 70%;
+    /* margin-left: 10px; */
     height: 100%;
-    z-index:-1;
-    border: none;
+    z-index:-999999999;
+    /* border: none; */
 }
 
 .icon {

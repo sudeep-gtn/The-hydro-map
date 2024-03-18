@@ -57,57 +57,58 @@ const HydropowerDetailsSidebar = () => {
 
     // console.log("Hydropower selected : ", selectedHydropower);
     return (
-      <div class="border border-gray-300 shadow-sm rounded-lg overflow-hidden max-w-sm mx-auto mt-16">
-      <table class="w-full text-sm leading-5">
-        <thead class="bg-gray-100">
-          <tr>
-            <th class="py-3 px-4 text-left font-medium text-gray-600">Nutrient</th>
-            <th class="py-3 px-4 text-left font-medium text-gray-600">Amount per Serving (100g)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="py-3 px-4 text-left font-medium text-gray-600">Calories</td>
-            <td class="py-3 px-4 text-left">240</td>
-          </tr>
-          <tr class="bg-gray-50">
-            <td class="py-3 px-4 text-left font-medium text-gray-600">Total Fat</td>
-            <td class="py-3 px-4 text-left">12g</td>
-          </tr>
-          <tr>
-            <td class="py-3 px-4 text-left font-medium text-gray-600 pl-8">Saturated Fat</td>
-            <td class="py-3 px-4 text-left">3.5g</td>
-          </tr>
-          <tr class="bg-gray-50">
-            <td class="py-3 px-4 text-left font-medium text-gray-600 pl-8">Trans Fat</td>
-            <td class="py-3 px-4 text-left">0g</td>
-          </tr>
-          <tr>
-            <td class="py-3 px-4 text-left font-medium text-gray-600">Cholesterol</td>
-            <td class="py-3 px-4 text-left">45mg</td>
-          </tr>
-          <tr class="bg-gray-50">
-            <td class="py-3 px-4 text-left font-medium text-gray-600">Sodium</td>
-            <td class="py-3 px-4 text-left">430mg</td>
-          </tr>
-          <tr>
-            <td class="py-3 px-4 text-left font-medium text-gray-600">Total Carbohydrate</td>
-            <td class="py-3 px-4 text-left">19g</td>
-          </tr>
-          <tr class="bg-gray-50">
-            <td class="py-3 px-4 text-left font-medium text-gray-600 pl-8">Dietary Fiber</td>
-            <td class="py-3 px-4 text-left">3g</td>
-          </tr>
-          <tr>
-            <td class="py-3 px-4 text-left font-medium text-gray-600 pl-8">Sugars</td>
-            <td class="py-3 px-4 text-left">4g</td>
-          </tr>
-          <tr class="bg-gray-50">
-            <td class="py-3 px-4 text-left font-medium text-gray-600">Protein</td>
-            <td class="py-3 px-4 text-left">22g</td>
-          </tr>
-        </tbody>
-      </table>
+      <div className="border border-gray-300 shadow-sm rounded-lg overflow-hidden mx-auto ">
+        <div className="text-center bg-gray-200 font-semibold text-lg p-4 border-b border-gray-400 ">Kulekhani Hydropower</div>
+        <table className="w-full text-sm leading-5">
+          <thead className="bg-gray-100 mt-2">
+            <tr>
+              <th className="py-3 px-4  text-left font-medium text-gray-600">Project</th>
+              <th className="py-3 px-4 text-left font-medium text-gray-600">Kulekhani Project b</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className="py-3 px-4 text-left font-medium text-gray-600">Calories</td>
+              <td className="py-3 px-4 text-left">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, iusto!</td>
+            </tr>
+            <tr className="bg-gray-50">
+              <td className="py-3 px-4 text-left font-medium text-gray-600 w-7">Address</td>
+              <td className="py-3 px-4 text-left">Lorem ipsum dolor sit amet consectetur.</td>
+            </tr>
+            <tr>
+              <td className="py-3 px-4 text-left font-medium text-gray-600">Liscese No</td>
+              <td className="py-3 px-4 text-left">240</td>
+            </tr>
+            <tr className="bg-gray-50">
+              <td className="py-3 px-4 text-left font-medium text-gray-600">Total Fat</td>
+              <td className="py-3 px-4 text-left">12g</td>
+            </tr>
+            <tr>
+              <td className="py-3 px-4 text-left font-medium text-gray-600">Calories</td>
+              <td className="py-3 px-4 text-left">240</td>
+            </tr>
+            <tr className="bg-gray-50">
+              <td className="py-3 px-4 text-left font-medium text-gray-600">Total Fat</td>
+              <td className="py-3 px-4 text-left">12g</td>
+            </tr>
+            <tr>
+              <td className="py-3 px-4 text-left font-medium text-gray-600">Calories</td>
+              <td className="py-3 px-4 text-left">240</td>
+            </tr>
+            <tr className="bg-gray-50">
+              <td className="py-3 px-4 text-left font-medium text-gray-600">Total Fat</td>
+              <td className="py-3 px-4 text-left">12g</td>
+            </tr>
+            <tr>
+              <td className="py-3 px-4 text-left font-medium text-gray-600">Calories</td>
+              <td className="py-3 px-4 text-left">240</td>
+            </tr>
+            <tr className="bg-gray-50">
+              <td className="py-3 px-4 text-left font-medium text-gray-600">Total Fat</td>
+              <td className="py-3 px-4 text-left">12g</td>
+            </tr>
+          </tbody>
+        </table>
     </div>
     );
 };
