@@ -31,6 +31,18 @@ function ProvinceGeoJSON({ visible, data }: any) {
 }
 
 
+interface HydropowerData {
+  Project: string;
+  Province: string;
+  District: string;
+  Municipality: string;
+  Capacity: number;
+  River: string;
+  LicenseNo: number;
+  IssueDate: string;
+  Validity: string;
+  Promoter: string;
+};
 
 function MyMapComponent() {
   const rectangle: LatLngTuple[] = [
@@ -39,7 +51,6 @@ function MyMapComponent() {
   ];
 
   const [zoomLevel, setZoomLevel] = useState(7.5);
-
 
   // Map contents tilelayer, marker, retangle and so on ..............
   function MapContent() {
@@ -92,7 +103,9 @@ function MyMapComponent() {
         <TileLayer
           minZoom={7}
           attribution='sudeep'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          // url="https://api.maptiler.com/maps/basic-v2/{z}/{x}/{y}.png?key=isWJpZkXVOqxIPlUJPNc"
+          // url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+          url="https://api.maptiler.com/maps/basic-v2/{z}/{x}/{y}@2x.png?key=isWJpZkXVOqxIPlUJPNc"
         />
 
         {/* Render either district or province GeoJSON based on zoom level */}
@@ -102,13 +115,14 @@ function MyMapComponent() {
       </>
     );
   }
-
   return (
     <div className="map-container">
       <MapContainer
         center={[28.054508481737447, 84.1650599076575]}
         zoom={zoomLevel}
         scrollWheelZoom={true}
+        zoomDelta={1}
+        zoomAnimation={true}
         style={{ height: "100%" }}>
 
         <MapContent />

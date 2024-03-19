@@ -65,13 +65,13 @@ const options = {
     }
   },
   layout: {
-     padding : 20
+     padding : 10
   }
 };
 
 export default function PieChart(){
     return (
-        <div className=' flex flex-row align-middle justify-center text- h-96 w-full border border-black-1000'>
+        <div className=' flex flex-row align-middle justify-center bg-gray-100 h-72 w-full border border-black-1000 overflow-hidden'>
             <Pie data={data} options={options}/>
         </div>
     );

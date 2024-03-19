@@ -25,16 +25,19 @@ const Map2 = dynamic(() => import('../components/Map'), {
 })
 const Home: React.FC<{}> = () => {
   return (
-    <div>
+    <div >
       <Nav />
       <div className="grid grid-cols-4 gap-4 z-0 ">
         <div className="col-span-3 ml-0 ">
           <Map2 />
         </div>
         <div className="col-span-1">
-          <HydropowerDetailsSidebar />
-          <div className="charts container border border-black-800 mt-2 rounded bg-gray-100">
-            <div className="text-center font-semibold text-lg p-4 border-b border-gray-400 bg-blue-200"> Hydropower Distribution </div>
+          <div>
+
+            <HydropowerDetailsSidebar />
+          </div>
+          <div className="">
+            <div className="text-center rounded font-semibold text-lg p-4 border-b border-gray-400 mt-4 bg-blue-200"> Hydropower Distribution </div>
             <PieChart />
           </div>
         </div>
