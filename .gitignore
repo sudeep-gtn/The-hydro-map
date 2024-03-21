@@ -35,7 +35,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-/data
-
-'maptiler-osm-2020-02-10-v3.11-asia_nepal.mbtiles?usage=non-commercial'

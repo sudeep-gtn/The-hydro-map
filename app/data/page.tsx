@@ -1,9 +1,9 @@
 import React from "react";
-import Nav from '../../components/Nav';
+import Nav from '../../components/navb/Nav';
 
 import hydroData from '../../data/hydro/hydropwers.json'
 
-function HydroData(){
+function HydroData() {
     let myData;
     // function getData(arr : Array<any>){
     //     for ( let data : number=0; data<arr.length ; data++){

@@ -1,12 +1,12 @@
 'use client';
 
 import Image from "next/image";
-import React, { useState } from 'react';
+import React, { useState, createContext, useContext } from 'react';
 
 import dynamic from 'next/dynamic'
 import Head from "next/head";
 // import Nav from '../components/Nav';
-import Nav from "@/components/Nav";
+import Nav from "@/components/navb/Nav";
 import '../styles/chart.css';
 import 'tailwindcss/tailwind.css';
 
@@ -15,35 +15,85 @@ import 'tailwindcss/tailwind.css';
 // let { hydropowerData } = useHydropower();
 
 
-import HydropowerDetailsSidebar from "@/components/HydroContext";
+import HydropowerDetailsSidebar from "@/components/HydroSidebarDetails";
 
 
 import PieChart from "@/components/charts/PieChart";
+import Example from "@/components/filterBars/FilterBar";
+import FilterContainerBar from "@/components/filterBars/FilterBar";
 
-const Map2 = dynamic(() => import('../components/Map'), {
+const Map2 = dynamic(() => import('../components/maps/Map'), {
   ssr: false,
 })
+
+// Context fof Search Result
+
+interface Project {
+  Project: string;
+  Province: string;
+  District: string;
+  Municipality: string;
+  Capacity: number;
+  River: string;
+  LicenseNo: number;
+  IssueDate: string;
+  Validity: string;
+  Promoter: string;
+};
+
+interface SelectedProjectContextType {
+  selectedProject: Project | null;
+  setSelectedProject: React.Dispatch<React.SetStateAction<Project | null>>;
+}
+
+const SelectedProjectContext = createContext<SelectedProjectContextType | undefined>(undefined);
+
+export const useSelectedProject = () => {
+  const context = useContext(SelectedProjectContext);
+  if (!context) {
+    throw new Error('useSelectedProject must be used within a SelectedProjectProvider');
+  }
+  return context;
+};
+
+export const SelectedProjectProvider = ({ children }: { children: React.ReactNode }) => {
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  return (
+    <SelectedProjectContext.Provider value={{ selectedProject, setSelectedProject }}>
+      {children}
+    </SelectedProjectContext.Provider>
+  );
+};
+
 const Home: React.FC<{}> = () => {
   return (
-    <div >
-      <Nav />
-      <div className="grid grid-cols-4 gap-4 z-0 ">
-        <div className="col-span-3 ml-0 ">
-          <Map2 />
-        </div>
-        <div className="col-span-1">
-          <div>
+    <SelectedProjectProvider>
+      {/* header section */}
+      <div className="bg-gray-200 ">
+        <Nav />
+        <FilterContainerBar />
 
-            <HydropowerDetailsSidebar />
+        {/* Body */}
+        <div className="grid grid-cols-4 gap-4 ">
+          {/* map Container */}
+          <div className="col-span-3">
+            <Map2 />
           </div>
-          <div className="">
-            <div className="text-center rounded font-semibold text-lg p-4 border-b border-gray-400 mt-4 bg-blue-200"> Hydropower Distribution </div>
-            <PieChart />
+
+          {/* Side Bar Details */}
+          <div className="col-span-1 mr-5">
+            <div>
+              <HydropowerDetailsSidebar />
+            </div>
+            <div className="">
+              <div className="text-center rounded font-semibold text-lg p-4 border-b border-gray-400 mt-4 bg-blue-200"> Hydropower Distribution </div>
+              <PieChart />
+            </div>
           </div>
         </div>
       </div>
-
-    </div>
+    </SelectedProjectProvider>
   );
 }
 

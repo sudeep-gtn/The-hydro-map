@@ -7,7 +7,7 @@ import 'tailwindcss/tailwind.css';
 import hydroData from '../../data/hydro/hydropwers.json'
 
 // hydroData context
-import { useHydropower } from "../HydroContext";
+import { useHydropower } from "../HydroSidebarDetails";
 
 
 
