@@ -7,8 +7,8 @@ import 'tailwindcss/tailwind.css';
 import hydroData from '../../data/hydro/hydropwers.json'
 
 // hydroData context
-import { useHydropower } from "../HydroSidebarDetails";
 
+import { useHydropower } from "../hydroDetails/HydroContext";
 
 
 // CSS files
@@ -51,8 +51,12 @@ const getIcon = (licenseType: string) => {
   });
 }
 
+const MarkerContents = () => {
+  const { setSelectedHydropower } = useHydropower();
 
-function MarkerContents() {
+  const handleClick = (item: any) => {
+    setSelectedHydropower(item);
+  };
 
   return (
     <>
@@ -63,20 +67,21 @@ function MarkerContents() {
           position={[item.Latitude, item.Longitude]}
           eventHandlers={{
             click: () => {
-              // handleClick(item);
-              console.log(item);
-            }
+              handleClick(item);
+            },
           }}
         >
           <Popup className="pop-up">
             <h1>{item.Project}</h1>
           </Popup>
-          <Tooltip sticky className="tooltipss"> {item.Project} </Tooltip>
+          <Tooltip sticky className="tooltipss">
+            {item.Project}
+          </Tooltip>
         </Marker>
       ))}
-      {/* <HydropowerProvider selectedHydropower={selectedHydropower} /> */}
     </>
   );
-}
+};
 
 export default MarkerContents;
+

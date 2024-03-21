@@ -1,4 +1,4 @@
-"use-client";
+"use client";
 
 import { useContext, useState, createContext } from "react";
 
@@ -105,7 +105,7 @@ function SearchBar() {
 export default function FilterContainerBar() {
   return (
     <header
-      className="flex flex-row text-xl z-10000 shadow-lg shadow-black-200/40 gap-10 p-1 h-14 mb-3 justify-left ">
+      className="flex flex-row text-xl z-10000 shadow-lg shadow-black-200/40 gap-5 align-center p-1 h-14 mb-3 justify-left ">
       {/* <FilterContents /> */}
       <SearchBar />
       {/* <DropDown /> */}

@@ -7,15 +7,14 @@ import dynamic from 'next/dynamic'
 import Head from "next/head";
 // import Nav from '../components/Nav';
 import Nav from "@/components/navb/Nav";
-import '../styles/chart.css';
 import 'tailwindcss/tailwind.css';
 
 // import {useHydropower, HydropowerProvider } from "@/components/HydroContext";// import Map2 from '../components/Map'
 
 // let { hydropowerData } = useHydropower();
 
-
-import HydropowerDetailsSidebar from "@/components/HydroSidebarDetails";
+import { HydropowerProvider } from "@/components/hydroDetails/HydroContext";
+import HydropowerDetailsSidebar from "@/components/hydroDetails/HydroSidebarDetails";
 
 
 import PieChart from "@/components/charts/PieChart";
@@ -25,6 +24,10 @@ import FilterContainerBar from "@/components/filterBars/FilterBar";
 const Map2 = dynamic(() => import('../components/maps/Map'), {
   ssr: false,
 })
+
+// import {useHydropower, HydropowerProvider } from "@/components/HydroContext";// import Map2 from '../components/Map'
+
+// let { hydropowerData } = useHydropower();
 
 // Context fof Search Result
 
@@ -39,28 +42,38 @@ interface Project {
   IssueDate: string;
   Validity: string;
   Promoter: string;
-};
+}
 
 interface SelectedProjectContextType {
   selectedProject: Project | null;
   setSelectedProject: React.Dispatch<React.SetStateAction<Project | null>>;
 }
 
-const SelectedProjectContext = createContext<SelectedProjectContextType | undefined>(undefined);
+const SelectedProjectContext = createContext<
+  SelectedProjectContextType | undefined
+>(undefined);
 
 export const useSelectedProject = () => {
   const context = useContext(SelectedProjectContext);
   if (!context) {
-    throw new Error('useSelectedProject must be used within a SelectedProjectProvider');
+    throw new Error(
+      "useSelectedProject must be used within a SelectedProjectProvider"
+    );
   }
   return context;
 };
 
-export const SelectedProjectProvider = ({ children }: { children: React.ReactNode }) => {
+export const SelectedProjectProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
-    <SelectedProjectContext.Provider value={{ selectedProject, setSelectedProject }}>
+    <SelectedProjectContext.Provider
+      value={{ selectedProject, setSelectedProject }}
+    >
       {children}
     </SelectedProjectContext.Provider>
   );
@@ -69,32 +82,37 @@ export const SelectedProjectProvider = ({ children }: { children: React.ReactNod
 const Home: React.FC<{}> = () => {
   return (
     <SelectedProjectProvider>
-      {/* header section */}
-      <div className="bg-gray-200 ">
-        <Nav />
-        <FilterContainerBar />
+      <HydropowerProvider>
+        {/* header section */}
+        <div className="bg-gray-200 ">
+          <Nav />
+          <FilterContainerBar />
 
-        {/* Body */}
-        <div className="grid grid-cols-4 gap-4 ">
-          {/* map Container */}
-          <div className="col-span-3">
-            <Map2 />
-          </div>
-
-          {/* Side Bar Details */}
-          <div className="col-span-1 mr-5">
-            <div>
-              <HydropowerDetailsSidebar />
+          {/* Body */}
+          <div className="grid grid-cols-4 gap-4 ">
+            {/* map Container */}
+            <div className="col-span-3">
+              <Map2 />
             </div>
-            <div className="">
-              <div className="text-center rounded font-semibold text-lg p-4 border-b border-gray-400 mt-4 bg-blue-200"> Hydropower Distribution </div>
-              <PieChart />
+
+            {/* Side Bar Details */}
+            <div className="col-span-1 mr-5">
+              <div>
+                <HydropowerDetailsSidebar />
+              </div>
+              <div className="">
+                <div className="text-center rounded font-semibold text-lg p-4 border-b border-gray-400 mt-4 bg-blue-200">
+                  {" "}
+                  Hydropower Distribution{" "}
+                </div>
+                <PieChart />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </HydropowerProvider>
     </SelectedProjectProvider>
   );
-}
+};
 
 export default Home;

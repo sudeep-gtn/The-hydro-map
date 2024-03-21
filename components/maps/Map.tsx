@@ -7,12 +7,13 @@ import VectorTileLayer from "react-leaflet-vector-tile-layer";
 
 // CSS-files
 import "tailwindcss/tailwind.css";
-import '../../styles/map.css';
-import '../../styles/legend.css';
+import './map.css';
+import './legend.css';
 
 // sub components
 import MyLocation from "./DetectYourLocation";
 import MarkerContents from "./Marker";
+
 //GeoJSON files 
 import districtTiles from '../../data/map-tiles/nepal-districts-new.json';
 import provinceTiles from '../../data/map-tiles/states.json';
