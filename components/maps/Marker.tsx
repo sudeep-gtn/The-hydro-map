@@ -53,14 +53,7 @@ const getIcon = (licenseType: string) => {
 
 
 function MarkerContents() {
-  // const { selectedHydropower, setSelectedHydropower } = useHydropower();
-  // // const {selectedHydropower,setSelectedHydropower}= useHydropower();
-  // function handleClick(item: any) {
-  //   setSelectedHydropower(item);
-  // }
 
-  // console.log(selectedHydropower);
-  // console.log("Selected Hydropwer:",selectedHydropower);
   return (
     <>
       {hydroData.map((item, index) => (
@@ -71,7 +64,7 @@ function MarkerContents() {
           eventHandlers={{
             click: () => {
               // handleClick(item);
-              console.log(item);  
+              console.log(item);
             }
           }}
         >

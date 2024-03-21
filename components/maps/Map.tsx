@@ -105,10 +105,10 @@ function MyMapComponent() {
           minZoom={7}
           attribution='sudeep'
           // url="https://api.maptiler.com/maps/basic-v2/{z}/{x}/{y}.png?key=isWJpZkXVOqxIPlUJPNc"
-          // url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-          // url="https://api.maptiler.com/maps/basic-v2/{z}/{x}/{y}@2x.png?key=isWJpZkXVOqxIPlUJPNc"
-          // url="https://api.maptiler.com/maps/satellite/{z}/{x}/{y}.jpg?key=isWJpZkXVOqxIPlUJPNc"
-          url="https://api.maptiler.com/maps/topo-v2/{z}/{x}/{y}.png?key=isWJpZkXVOqxIPlUJPNc"
+          url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+        // url="https://api.maptiler.com/maps/basic-v2/{z}/{x}/{y}@2x.png?key=isWJpZkXVOqxIPlUJPNc"
+        // url="https://api.maptiler.com/maps/satellite/{z}/{x}/{y}.jpg?key=isWJpZkXVOqxIPlUJPNc"
+        // url="https://api.maptiler.com/maps/topo-v2/{z}/{x}/{y}.png?key=isWJpZkXVOqxIPlUJPNc"
         />
 
         {/* Render either district or province GeoJSON based on zoom level */}

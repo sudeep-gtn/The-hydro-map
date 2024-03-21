@@ -54,12 +54,12 @@ function SearchBar() {
 
   return (
     <div className="relative bg-gray-200 rounded-lg pb-2">
-      <div className="relative bg-inherit px-4">
+      <div className="relative bg-inherit px-4 ">
         <input
           type="text"
           id="search"
           name="search"
-          className="peer bg-transparent h-10 text-base w-72 rounded-lg text-gray-800 placeholder-transparent ring-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600"
+          className="peer bg-transparent bg-gray-100 h-10 text-base w-72 rounded-lg text-gray-800 placeholder-transparent ring-2 ring-gray-500 focus:ring-sky-600 focus:outline-none focus:border-rose-600"
           placeholder="Search"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -104,7 +104,8 @@ function SearchBar() {
 
 export default function FilterContainerBar() {
   return (
-    <header className="flex flex-row text-xl z-10000 shadow-lg shadow-black-200/40 bg-gray-00 p-1 mb-3 justify-left ">
+    <header
+      className="flex flex-row text-xl z-10000 shadow-lg shadow-black-200/40 gap-10 p-1 h-14 mb-3 justify-left ">
       {/* <FilterContents /> */}
       <SearchBar />
       {/* <DropDown /> */}
