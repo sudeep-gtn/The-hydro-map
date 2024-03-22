@@ -5,7 +5,7 @@ import { useContext, useState, createContext } from "react";
 import hydroData from "../../data/hydro/hydropwers.json";
 
 import { DropDown } from "./DropDownOptions";
-import ProvinceCheckBox from './CheckBox';
+import { ProvinceCheckBox, DistrictCheckBox, LicenseTypeCheckBox } from './CheckBox';
 
 
 interface Project {
@@ -21,23 +21,13 @@ interface Project {
   Promoter: string;
 }
 
-import { useSelectedProject } from "@/app/page";
-
-
-
 function SearchBar() {
-  const { selectedProject, setSelectedProject } = useSelectedProject();
   const [searchQuery, setSearchQuery] = useState("");
   const [showResults, setShowResults] = useState(false);
   // Function to filter projects based on search query
   const filteredProjects = hydroData.filter((project) =>
     project.Project.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
-  const handleSelection = (project: Project) => {
-    setSelectedProject(project);
-  };
-  console.log(selectedProject);
   const fakeData = {
     Project: "string",
     Province: "string",
@@ -82,18 +72,17 @@ function SearchBar() {
       {/* Display filtered projects only when showResults is true */}
       {showResults && (
         <ul
-          style={{ zIndex: 100000 }}
+          style={{ zIndex: 10000 }}
           className="absolute mt-4 w-96 max-h-72 overflow-y-hidden text-base bg-gray-200 shadow-lg shadow-black-700/50 rounded-lg shadow-md border border-gray-300"
         >
           {filteredProjects.map((project, index) => (
             <li
+              onClick={() => console.log('Clicked Finally !!')}
               key={index}
               className="text-gray-800 px-4 py-2 border-b border-gray-300 hover:bg-gray-100"
             >
-              <button onClick={() => handleSelection(fakeData)}>
-                {" "}
-                {project.Project}
-              </button>
+              {" "}
+              <button >{project.Project}</button>
             </li>
           ))}
         </ul>
@@ -110,6 +99,8 @@ export default function FilterContainerBar() {
       <SearchBar />
       {/* <DropDown /> */}
       <ProvinceCheckBox />
+      <DistrictCheckBox />
+      <LicenseTypeCheckBox />
     </header >
   );
 }

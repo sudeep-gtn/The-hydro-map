@@ -1,4 +1,4 @@
-"use-client";
+"use client";
 
 import { Fragment, useContext, useState, createContext } from "react";
 import { Listbox, Transition } from "@headlessui/react";

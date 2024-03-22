@@ -1,5 +1,4 @@
 'use client';
-
 import Image from "next/image";
 import React, { useState, createContext, useContext } from 'react';
 
@@ -13,7 +12,11 @@ import 'tailwindcss/tailwind.css';
 
 // let { hydropowerData } = useHydropower();
 
-import { HydropowerProvider } from "@/components/hydroDetails/HydroContext";
+
+
+import { HydropowerProvider } from "@/components/hydroDetails/HydroContext"; // Context for Marker click sidebar details
+import { ProvinceProvider } from '@/components/filterBars/CheckBox';
+
 import HydropowerDetailsSidebar from "@/components/hydroDetails/HydroSidebarDetails";
 
 
@@ -49,40 +52,11 @@ interface SelectedProjectContextType {
   setSelectedProject: React.Dispatch<React.SetStateAction<Project | null>>;
 }
 
-const SelectedProjectContext = createContext<
-  SelectedProjectContextType | undefined
->(undefined);
-
-export const useSelectedProject = () => {
-  const context = useContext(SelectedProjectContext);
-  if (!context) {
-    throw new Error(
-      "useSelectedProject must be used within a SelectedProjectProvider"
-    );
-  }
-  return context;
-};
-
-export const SelectedProjectProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-
-  return (
-    <SelectedProjectContext.Provider
-      value={{ selectedProject, setSelectedProject }}
-    >
-      {children}
-    </SelectedProjectContext.Provider>
-  );
-};
 
 const Home: React.FC<{}> = () => {
   return (
-    <SelectedProjectProvider>
-      <HydropowerProvider>
+    <HydropowerProvider>
+      <ProvinceProvider>
         {/* header section */}
         <div className="bg-gray-200 ">
           <Nav />
@@ -97,21 +71,15 @@ const Home: React.FC<{}> = () => {
 
             {/* Side Bar Details */}
             <div className="col-span-1 mr-5">
+              <HydropowerDetailsSidebar />
               <div>
-                <HydropowerDetailsSidebar />
-              </div>
-              <div className="">
-                <div className="text-center rounded font-semibold text-lg p-4 border-b border-gray-400 mt-4 bg-blue-200">
-                  {" "}
-                  Hydropower Distribution{" "}
-                </div>
                 <PieChart />
               </div>
             </div>
           </div>
         </div>
-      </HydropowerProvider>
-    </SelectedProjectProvider>
+      </ProvinceProvider>
+    </HydropowerProvider>
   );
 };
 

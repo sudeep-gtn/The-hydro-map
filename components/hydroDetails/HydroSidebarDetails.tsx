@@ -1,10 +1,11 @@
-// HydropowerDetailsSidebar.tsx
-import React from "react";
+'use client';
+
+import React, { useEffect, useState } from "react";
 import { useHydropower } from "./HydroContext";
 
 const HydropowerDetailsSidebar = () => {
   const { selectedHydropower } = useHydropower();
-  const excludedKeys = ['Latitude', 'Longitude'];
+  const excludedKeys = ['Latitude', 'Longitude', 'Project'];
   const renderDetails = () => {
     if (!selectedHydropower) return null;
 
@@ -19,10 +20,7 @@ const HydropowerDetailsSidebar = () => {
         </tr>
       ));
   };
-  console.log("Selected Hydropower:", selectedHydropower);
   return (
-
-
     <>
       <div className="bg-blue-200 rounded">
         <p className="text-center h-14 font-semibold text-lg p-4 border-b border-gray-400">
@@ -34,7 +32,7 @@ const HydropowerDetailsSidebar = () => {
       <div className="border border-gray-300 shadow-sm overflow-y-scroll h-96 mx-auto static">
         <table className="w-full text-sm leading-5 z-0">
           <tbody>
-            {selectedHydropower ? renderDetails() : "NO DATA FOUND "}
+            {selectedHydropower ? renderDetails() : "404 DATA NOT FOUND !! "}
           </tbody>
         </table>
       </div>

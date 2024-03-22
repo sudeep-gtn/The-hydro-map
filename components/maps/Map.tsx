@@ -13,7 +13,8 @@ import './legend.css';
 // sub components
 import MyLocation from "./DetectYourLocation";
 import MarkerContents from "./Marker";
-
+import { FilteredMarkers } from "./Marker";
+import { useFilterContext } from "../filterBars/CheckBox";
 //GeoJSON files 
 import districtTiles from '../../data/map-tiles/nepal-districts-new.json';
 import provinceTiles from '../../data/map-tiles/states.json';
@@ -87,6 +88,7 @@ function MyMapComponent() {
       // Add legend to map
       legend.addTo(map);
 
+
       const updateZoomLevel = () => {
         setZoomLevel(Math.round(map.getZoom()));
       };
@@ -99,7 +101,8 @@ function MyMapComponent() {
       };
     }, [map]);
 
-
+    const { checkedFilters } = useFilterContext();
+    const hasCheckedProvinces = checkedFilters.length > 0;
     return (
       <>
         <TileLayer
@@ -114,7 +117,7 @@ function MyMapComponent() {
 
         {/* Render either district or province GeoJSON based on zoom level */}
         {zoomLevel > 8.5 ? <DistrictGeo visible={true} data={districtTiles} /> : <ProvinceGeoJSON visible={true} data={provinceTiles} />}
-        {zoomLevel > 7.6 ? <MarkerContents /> : null}
+        {zoomLevel > 7.5 ? (hasCheckedProvinces ? <FilteredMarkers /> : <MarkerContents />) : null}
         <MyLocation />
       </>
     );

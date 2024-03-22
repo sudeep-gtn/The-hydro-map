@@ -9,7 +9,7 @@ import hydroData from '../../data/hydro/hydropwers.json'
 // hydroData context
 
 import { useHydropower } from "../hydroDetails/HydroContext";
-
+import { useFilterContext } from '../filterBars/CheckBox';
 
 // CSS files
 import './popup.css';
@@ -51,15 +51,51 @@ const getIcon = (licenseType: string) => {
   });
 }
 
-const MarkerContents = () => {
+export function FilteredMarkers() {
+  const { checkedFilters, setCheckedFilters } = useFilterContext();
+
+  const filteredHydroData = hydroData.filter((item: any) => {
+    return checkedFilters.includes(item.Province) || checkedFilters.includes(item.District) || checkedFilters.includes(item['License Type']);
+  });
+
   const { setSelectedHydropower } = useHydropower();
 
   const handleClick = (item: any) => {
     setSelectedHydropower(item);
   };
-
   return (
     <>
+      {filteredHydroData.map((item, index) => (
+        <Marker
+          icon={getIcon(item["License Type"])}
+          key={index}
+          position={[item.Latitude, item.Longitude]}
+          eventHandlers={{
+            click: () => {
+              handleClick(item);
+            },
+          }}
+        >
+          <Popup className="pop-up">
+            <h1>{item.Project}</h1>
+          </Popup>
+          <Tooltip sticky className="tooltipss">
+            {item.Project}
+          </Tooltip>
+        </Marker>
+      ))}
+    </>
+  );
+}
+
+const MarkerContents = () => {
+  const { setSelectedHydropower } = useHydropower();
+  const handleClick = (item: any) => {
+    setSelectedHydropower(item);
+  };
+  return (
+    <>
+      <FilteredMarkers />
       {hydroData.map((item, index) => (
         <Marker
           icon={getIcon(item["License Type"])}

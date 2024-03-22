@@ -1,3 +1,4 @@
+'use client';
 import React, { useState } from "react"
 import L from 'leaflet';
 import { Marker, useMapEvents, Popup, Circle, Tooltip, } from "react-leaflet"
@@ -10,7 +11,7 @@ interface Position {
 
 
 const myLocationIcon = L.icon({
-  iconUrl : 'https://api.geoapify.com/v1/icon/?type=circle&color=%23354a81&size=large&icon=wifi&iconType=awesome&iconSize=small&apiKey=2d6a0e73bd9f4639b8172b46216c43f7',
+  iconUrl: 'https://api.geoapify.com/v1/icon/?type=circle&color=%23354a81&size=large&icon=wifi&iconType=awesome&iconSize=small&apiKey=2d6a0e73bd9f4639b8172b46216c43f7',
   iconSize: [25, 41],
   iconAnchor: [12.5, 41],
   popupAnchor: [0, -41],
