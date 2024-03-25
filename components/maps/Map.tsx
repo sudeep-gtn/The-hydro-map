@@ -61,7 +61,7 @@ function MyMapComponent() {
 
 
     useEffect(() => {
-      const legend = L.control({ position: 'topright' });
+      const legend = L.control({ position: 'bottomleft' });
 
 
       // Define legend content
@@ -117,7 +117,7 @@ function MyMapComponent() {
 
         {/* Render either district or province GeoJSON based on zoom level */}
         {zoomLevel > 8.5 ? <DistrictGeo visible={true} data={districtTiles} /> : <ProvinceGeoJSON visible={true} data={provinceTiles} />}
-        {zoomLevel > 7.5 ? (hasCheckedProvinces ? <FilteredMarkers /> : <MarkerContents />) : null}
+        {zoomLevel > 7.2 ? (hasCheckedProvinces ? <FilteredMarkers /> : <MarkerContents />) : null}
         <MyLocation />
       </>
     );

@@ -5,8 +5,8 @@ import { useContext, useState, createContext } from "react";
 import hydroData from "../../data/hydro/hydropwers.json";
 
 import { DropDown } from "./DropDownOptions";
-import { ProvinceCheckBox, DistrictCheckBox, LicenseTypeCheckBox } from './CheckBox';
-
+import { ProvinceCheckBox, DistrictCheckBox, LicenseTypeCheckBox, CapacityFilter } from './CheckBox';
+import { useFilterContext } from "./CheckBox";
 
 interface Project {
   Project: string;
@@ -91,16 +91,41 @@ function SearchBar() {
   );
 }
 
+// -----------------Clear all searches--------------------
+
+export function ClearFilters() {
+  const { setCheckedFilters } = useFilterContext();
+  const clearAllFilters = () => {
+    // Reset all filters to initial values
+    setCheckedFilters([]);
+  };
+  return (
+    <div className="relative">
+      <button
+        onClick={clearAllFilters}
+        className=" py-2 px-2 items-center border border-gray-400 text-sm font-medium text-center text-gray-900 bg-blue-100 rounded-lg hover:bg-blue-200 "
+        type="button"
+      >
+        Clear Filters
+      </button>
+    </div>
+  )
+}
+
 export default function FilterContainerBar() {
   return (
     <header
-      className="flex flex-row text-xl z-10000 shadow-lg shadow-black-200/40 gap-5 align-center p-1 h-14 mb-3 justify-left ">
+      className="flex flex-row text-xl z-10000 shadow-lg shadow-black-200/40 gap-10 align-center p-1 h-14 mb-3 justify-left ">
       {/* <FilterContents /> */}
       <SearchBar />
       {/* <DropDown /> */}
       <ProvinceCheckBox />
       <DistrictCheckBox />
       <LicenseTypeCheckBox />
+      <CapacityFilter />
+      <ClearFilters />
     </header >
   );
 }
+
+

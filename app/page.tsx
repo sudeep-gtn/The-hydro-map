@@ -12,8 +12,6 @@ import 'tailwindcss/tailwind.css';
 
 // let { hydropowerData } = useHydropower();
 
-
-
 import { HydropowerProvider } from "@/components/hydroDetails/HydroContext"; // Context for Marker click sidebar details
 import { ProvinceProvider } from '@/components/filterBars/CheckBox';
 
@@ -70,7 +68,7 @@ const Home: React.FC<{}> = () => {
             </div>
 
             {/* Side Bar Details */}
-            <div className="col-span-1 mr-5">
+            <div className="col-span-1 ">
               <HydropowerDetailsSidebar />
               <div>
                 <PieChart />

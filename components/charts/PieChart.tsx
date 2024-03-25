@@ -1,6 +1,6 @@
 'use client';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Pie } from 'react-chartjs-2';
+import { Pie, Doughnut } from 'react-chartjs-2';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 import hydroData from '../../data/hydro/hydropwers.json';
@@ -11,17 +11,26 @@ export default function PieChart() {
 
   const filteredLicenseTypeCount = (data: any[]) => {
     let filteredHydroData = data;
-
     if (checkedFilters.length > 0) {
-      // If both provinces and districts are selected, filter districts within selected provinces
-      if (checkedFilters.some(filter => filter.includes("District"))) {
-        const selectedProvinces = checkedFilters.filter(filter => !filter.includes("District"));
-        filteredHydroData = data.filter(item => selectedProvinces.includes(item.Province));
-      } else {
-        filteredHydroData = data.filter(item => checkedFilters.includes(item.Province) || checkedFilters.includes(item.District) || checkedFilters.includes(item['License Type']));
-      }
+      filteredHydroData = hydroData.filter((item: any) => {
+        if (checkedFilters.includes("lessThan20")) {
+          // Filter items with capacity less than 20
+          return item["Capacity (MW)"] < 20;
+        } else if (checkedFilters.includes("20to50")) {
+          // Filter items with capacity between 20 and 50
+          return item["Capacity (MW)"] >= 20 && item["Capacity (MW)"] <= 50;
+        } else if (checkedFilters.includes("50to100")) {
+          // Filter items with capacity between 50 and 100
+          return item["Capacity (MW)"] > 50 && item["Capacity (MW)"] <= 100;
+        } else if (checkedFilters.includes("above100")) {
+          // Filter items with capacity above 100
+          return item["Capacity (MW)"] > 100;
+        } else {
+          // Return true for items if no capacity range is selected
+          return checkedFilters.includes(item.Province) || checkedFilters.includes(item.District) || checkedFilters.includes(item['License Type']);
+        }
+      });
     }
-
     let surveyCount = 0;
     let constructionCount = 0;
     let operationCount = 0;
@@ -85,12 +94,12 @@ export default function PieChart() {
   const headline = ['According to Filter', 'Total Distribution'];
   return (
     <>
-      <div className="text-center rounded font-semibold text-lg p-4 border-b border-gray-400 mt-4 bg-blue-200">
+      <div className="text-center rounded font-semibold text-lg p-4 border-b border-gray-400 mt-2 bg-blue-200">
         {" "}
         {checkedFilters.length > 0 ? headline[0] : headline[1]}{" "}
       </div>
-      <div className='flex flex-row align-middle justify-center bg-gray-100 h-72 w-full border border-black-1000 overflow-hidden'>
-        <Pie data={data} options={options} />
+      <div className='flex flex-row align-middle justify-center bg-gray-100 h-64 w-full border border-black-1000 overflow-hidden'>
+        <Doughnut data={data} options={options} />
       </div>
     </>
   );

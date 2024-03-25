@@ -52,12 +52,36 @@ const getIcon = (licenseType: string) => {
 }
 
 export function FilteredMarkers() {
+
   const { checkedFilters, setCheckedFilters } = useFilterContext();
 
+
+  const hasProvinceFilter = checkedFilters.some(filter => filter.includes("Province"));
+  const hasDistrictFilter = checkedFilters.some(filter => filter.includes("District"));
+
   const filteredHydroData = hydroData.filter((item: any) => {
-    return checkedFilters.includes(item.Province) || checkedFilters.includes(item.District) || checkedFilters.includes(item['License Type']);
+    if (checkedFilters.includes("lessThan20")) {
+      // Filter items with capacity less than 20
+      return item["Capacity (MW)"] < 20;
+    } else if (checkedFilters.includes("20to50")) {
+      // Filter items with capacity between 20 and 50
+      return item["Capacity (MW)"] >= 20 && item["Capacity (MW)"] <= 50;
+    } else if (checkedFilters.includes("50to100")) {
+      // Filter items with capacity above 50
+      return item["Capacity (MW)"] > 50 && item['Capacity (MW)'] <= 100;
+    } else if (checkedFilters.includes('above100')) {
+      return item["Capacity (MW)"] > 100;
+    }
+    else {
+      // Return true for items if no capacity range is selected
+      return checkedFilters.includes(item.Province) || checkedFilters.includes(item.District) || checkedFilters.includes(item['License Type'])
+    }
   });
 
+
+
+
+  if (!checkedFilters) return true;
   const { setSelectedHydropower } = useHydropower();
 
   const handleClick = (item: any) => {
