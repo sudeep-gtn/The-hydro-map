@@ -8,7 +8,6 @@ const storedDataString = localStorage.getItem("userData");
 const storedData = storedDataString ? JSON.parse(storedDataString) : null;
 
 export default function Nav() {
-
   const logOut = () => {
     localStorage.removeItem("userData");
     window.location.reload();
@@ -21,8 +20,6 @@ export default function Nav() {
   const handleMouseLeave = () => {
     setOpen(false);
   };
-
-
   const [open, setOpen] = React.useState(false);
   return (
     <header className="flex flex-row text-xl border-b border-gray-500 bg-gray-00 p-1 mb-3  justify-between">
