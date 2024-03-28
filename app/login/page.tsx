@@ -13,9 +13,13 @@ export default function Login() {
         const { id, value } = e.target;
         setFormData({ ...formData, [id]: value });
     };
+    const storedDataString = localStorage.getItem("userData");
+    const storedData = storedDataString ? JSON.parse(storedDataString) : null;
+
+    if (storedData) {
+        window.location.href = "/";
+    }
     const handleLogin = () => {
-        const storedDataString = localStorage.getItem("userData");
-        const storedData = storedDataString ? JSON.parse(storedDataString) : null;
         if (!storedData) {
             alert("Please register first!");
             return;

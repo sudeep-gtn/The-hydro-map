@@ -12,12 +12,16 @@ export default function SignUp() {
         password: "",
         c_password: "",
     });
+    const storedDataString = localStorage.getItem("userData");
+    const storedData = storedDataString ? JSON.parse(storedDataString) : null;
+
+    if (storedData) {
+        window.location.href = '/';
+    }
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { id, value } = e.target;
         setFormData((prevFormData) => ({ ...prevFormData, [id]: value }));
     };
-    const storedDataString = localStorage.getItem("userData");
-    const storedData = storedDataString ? JSON.parse(storedDataString) : null;
 
     console.log("Stoere ll", storedData);
     if (storedData && storedData.email === formData.email) {
