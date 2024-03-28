@@ -56,6 +56,38 @@ export function ProvinceCheckBox() {
         }
     };
 
+    const allProvinces = Array.from(new Set(hydroData.map((data: any) => data.Province)));
+    const provinces = allProvinces.map(province => {
+        let label = "";
+        switch (province) {
+            case "Province 1":
+                label = "Koshi";
+                break;
+            case "Province 2":
+                label = "Madhesh";
+                break;
+            case "Province 3":
+                label = "Bagmati";
+                break;
+            case "Province 4":
+                label = "Gandaki";
+                break;
+            case "Province 5":
+                label = "Lumbini";
+                break;
+            case "Province 6":
+                label = "Karnali";
+                break;
+            case "Province 7":
+                label = "Sudurpashchim";
+                break;
+            default:
+                label = "";
+                break;
+        }
+        return { value: province, label };
+    }).sort((a: any, b) => a.value.localeCompare(b.value));
+    console.log("All provinces : ", provinces);
     const filteredData = hydroData.filter((item: HydroData) => checkedFilters.includes(item.Province));
     return (
         <div className="relative mb-3 flex flex-col align-center justify-center w-48">
@@ -85,7 +117,7 @@ export function ProvinceCheckBox() {
             {optionsVisible && (
                 <div style={{ zIndex: 100000 }} className="absolute top-full mt-4 p-2 w-44 rounded-lg shadow border border-gray-400 bg-gray-200 text-sm">
                     <ul className="p-2 h-64 overflow-y-auto overflow-x-hidden ">
-                        {provinces.map((province, index) => (
+                        {provinces.map((province: any, index) => (
                             <li key={index}>
                                 <label className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-white">
                                     <input
@@ -107,15 +139,15 @@ export function ProvinceCheckBox() {
     );
 }
 
-const provinces = [
-    { value: "Province 1", label: "Koshi" },
-    { value: "Province 2", label: "Madhesh" },
-    { value: "Province 3", label: "Bagmati" },
-    { value: "Province 4", label: "Gandaki" },
-    { value: "Province 5", label: "Lumbini" },
-    { value: "Province 6", label: "Karnali" },
-    { value: "Province 7", label: "Sudurpashchim" },
-];
+// const provinces = [
+//     { value: "Province 1", label: "Koshi" },
+//     { value: "Province 2", label: "Madhesh" },
+//     { value: "Province 3", label: "Bagmati" },
+//     { value: "Province 4", label: "Gandaki" },
+//     { value: "Province 5", label: "Lumbini" },
+//     { value: "Province 6", label: "Karnali" },
+//     { value: "Province 7", label: "Sudurpashchim" },
+// ];
 
 
 
@@ -138,17 +170,20 @@ export const DistrictCheckBox = () => {
         }
     };
 
+    console.log("Checked Filters", checkedFilters);
+
     const hasProvinceFilter = checkedFilters.some(filter => filter.includes("Province"));
 
-
-    const filteredDistricts = Array.from(new Set(
-        hydroData
-            .filter((data: any) => checkedFilters.includes(data.Province))
-            .map((data: any) => data.District)
-    ));
-    if(hasProvinceFilter){
-        filteredDistricts 
+    let filteredDistricts;
+    if (hasProvinceFilter) {
+        filteredDistricts = Array.from(new Set(hydroData.filter((data: any) => checkedFilters.includes(data.Province)).map((data: any) => data.District)));
+    } else {
+        // No province filter selected, return all districts
+        filteredDistricts = Array.from(new Set(hydroData.map((data: any) => data.District)));
     }
+    // if (hasProvinceFilter) {
+    //     filteredDistricts
+    // }
     console.log(filteredDistricts)
     return (
         <div className="relative  mb-3 flex flex-col align-center justify-center flex flex-col align-center justify-center">
@@ -182,7 +217,7 @@ export const DistrictCheckBox = () => {
                                         onChange={handleCheckboxChange}
                                         checked={checkedFilters.includes(district)}
                                     />
-                                    <span className="ms-2">{district.label}</span>
+                                    <span className="ms-2">{district}</span>
                                 </label>
                             </li>
                         ))}

@@ -1,16 +1,11 @@
 'use client';
-import Image from "next/image";
-import React, { useState, createContext, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
+import { redirect } from "next/navigation";
 
 import dynamic from 'next/dynamic'
-import Head from "next/head";
-// import Nav from '../components/Nav';
 import Nav from "@/components/navb/Nav";
 import 'tailwindcss/tailwind.css';
 
-// import {useHydropower, HydropowerProvider } from "@/components/HydroContext";// import Map2 from '../components/Map'
-
-// let { hydropowerData } = useHydropower();
 
 import { HydropowerProvider } from "@/components/hydroDetails/HydroContext"; // Context for Marker click sidebar details
 import { ProvinceProvider } from '@/components/filterBars/CheckBox';
@@ -26,11 +21,6 @@ const Map2 = dynamic(() => import('../components/maps/Map'), {
   ssr: false,
 })
 
-// import {useHydropower, HydropowerProvider } from "@/components/HydroContext";// import Map2 from '../components/Map'
-
-// let { hydropowerData } = useHydropower();
-
-// Context fof Search Result
 
 interface Project {
   Project: string;
@@ -52,6 +42,15 @@ interface SelectedProjectContextType {
 
 
 const Home: React.FC<{}> = () => {
+
+  useEffect(() => {
+    const storedData = localStorage.getItem("userData");
+
+    if (!storedData) {
+      redirect('/register');
+    }
+  }, []);
+
   return (
     <HydropowerProvider>
       <ProvinceProvider>
